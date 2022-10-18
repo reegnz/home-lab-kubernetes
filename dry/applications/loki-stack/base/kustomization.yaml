@@ -13,9 +13,15 @@ helmCharts:
   valuesInline:
     loki:
       enabled: true
+      rbac:
+        pspEnabled: false
     promtail:
       enabled: true
+      rbac:
+        pspEnabled: false
     grafana:
       enabled: true
+      rbac:
+        pspEnabled: false
       admin:
         existingSecret: loki-grafana
