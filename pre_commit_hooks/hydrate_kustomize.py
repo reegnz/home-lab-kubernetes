@@ -9,7 +9,7 @@ import subprocess
 import types
 from functools import cache
 
-import git.repo
+import git
 
 logging.basicConfig(
     level=os.environ.get("LOGLEVEL", "INFO"),
@@ -20,7 +20,7 @@ log = logging.getLogger("hydrate")
 
 @cache
 def get_git_root():
-    git_repo = git.repo.Repo(os.getcwd(), search_parent_directories=True)
+    git_repo = git.Repo()
     return git_repo.working_tree_dir
 
 
@@ -132,8 +132,8 @@ def reconcile():
 
     prune(dry, wet)
     hydrate(dry)
-    git_repo = git.repo.Repo(os.getcwd(), search_parent_directories=True)
-    git_repo.index.add(["wet"])
+    git_repo = git.Repo()
+    git_repo.git.add("wet", A=True)
 
 
 def main():
